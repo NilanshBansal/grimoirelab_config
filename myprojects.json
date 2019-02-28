@@ -1,0 +1,25 @@
+{
+    "Heroku": {
+        "git": [
+          "https://github.com/jessamynsmith/heroku-buildpack-apt.git",
+
+        ],
+        "github:pull": [
+            "https://github.com/jessamynsmith/heroku-buildpack-apt"
+        ],
+        "github:issue": [
+            "https://github.com/jessamynsmith/heroku-buildpack-apt"
+        ],
+        "stackexchange": [
+            "http://stackoverflow.com/questions/tagged/heroku"
+        ],
+        "twitter": [
+            "heroku"
+        ],
+        "meetup": [
+            "South-East-Puppet-User-Group"
+        ]
+    }
+
+    
+}

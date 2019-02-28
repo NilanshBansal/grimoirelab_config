@@ -1,0 +1,284 @@
+docker run -p 127.0.0.1:5601:5601 -v /Users/nilansh/Desktop/grimoirelab_config/credentials.cfg:/override.cfg -v /Users/nilansh/Desktop/grimoirelab_config/myprojects.json:/projects.json -ti grimoirelab/full
+
+
+docker run -p 5601:5601 -v $(pwd)/credentials.cfg:/mordred-override.cfg -t grimoirelab/full
+
+ssh -i Downloads/grimoire.pem ubuntu@ec2-18-223-235-95.us-east-2.compute.amazonaws.com
+
+python3 -m venv /tmp/gl
+source /tmp/gl/bin/activate
+
+source /Users/nilansh/Desktop/grimoirelab/virtualenv/bin/activate
+pip install perceval
+
+
+ELASTICSEARCH
+curl http://localhost:9200/_aliases?pretty
+
+CREATE INDEX KIBANA
+curl -XPUT http://localhost:9200/.kibana/ -d '{ "index.mapper.dynamic": true }' -H 'Content-Type: application/json'
+
+perceval git https://github.com/grimoirelab/perceval
+perceval github elastic logstash --from-date '2019-02-25' --sleep-for-rate -t 5b708cdcb6717fc15f72f0bc28d718cd17c770ba
+
+perceval stackexchange --site stackoverflow --tagged python --from-date '2019-02-25'
+
+GRIMOIRELAB ELK
+pip install grimoire-elk 
+Original request
+
+p2o.py --enrich --index git_raw --index-enrich git -e http://localhost:9200 --no_inc backend git https://github.com/grimoirelab/perceval.git
+
+p2o.py --enrich --index mail_grimoirelab-raw --index-enrich mail_grimoirelab -e http://localhost:9200 --no_inc --debug pipermail 'https://mail.gnome.org/archives/libart-hackers/'
+  
+Modified request
+p2o.py --enrich --index git_raw --index-enrich git -e http://localhost:9200 --no_inc --debug git https://github.com/grimoirelab/perceval.git
+
+p2o.py --enrich --index meetup_raw --index-enrich meetup -e http://localhost:9200 --no_inc --debug meetup group_name -t meetup_key --tag group_name
+
+p2o.py --enrich --index stackoverflow_raw --index-enrich stackoverflow -e http://localhost:9200 --no_inc --debug stackoverflow --site stackoverflow --tagged python --from-date '2019-02-27'
+
+
+perceval confluence 'https://wiki.opnfv.org/' --from-date '2016-01-01'
+
+MEETUP KEY
+256d29254cbf254611f842747d28
+
+
+NOT WORKING
+
+
+MORDRED DASHBOARD
+
+
+
+docker run -p 5601:5601 -v $(pwd)/credentials.cfg:/mordred-override.cfg -t grimoirelab/full
+
+docker run --net="host" -v $(pwd)/mytoken.cfg:/mordred-override.cfg grimoirelab/installed  
+
+
+--debug --index github-data github grimoirelab perceval --api-token <my-token> --sleep-for-rate
+
+
+
+
+
+DOCKER CONFIG
+
+docker stop $(docker ps -aq);docker rm $(docker ps -aq)
+
+docker run -p 127.0.0.1:5601:5601 \
+    -v $(pwd)/credentials.cfg:/override.cfg \
+    -ti grimoirelab/full
+
+Add -d to run in detached mode
+
+docker run -p 127.0.0.1:5601:5601 -v /Users/nilansh/Desktop/grimoirelab_config/credentials.cfg:/override.cfg -ti grimoirelab/full
+
+docker run -p 127.0.0.1:5601:5601 -v /Users/nilansh/Desktop/grimoirelab_config/credentials.cfg:/override.cfg -v /Users/nilansh/Desktop/grimoirelab_config/myprojects.json:/projects.json -ti grimoirelab/full
+
+docker ps -a
+
+docker exec -it a910ac2d491b perceval git https://github.com/grimoirelab/perceval
+
+
+LIST ALL ELASTICSEARCH DATA
+
+docker exec -it a910ac2d491b curl -X GET "localhost:9200/_search" -H 'Content-Type: application/json' -d'
+{
+    "query": {
+        "match_all": {}
+    }
+}
+'
+
+
+
+docker exec -it a910ac2d491b curl http://localhost:9200/_aliases?pretty
+
+docker exec -it a910ac2d491b p2o.py --enrich --index stackexchange_raw --index-enrich stackexchange -e http://localhost:9200 --no_inc --debug stackexchange --site stackoverflow --tagged python --from-date '2019-02-27'
+
+
+docker cp /tmp/git-dashboard.json a910ac2d491b:/home/grimoirelab/git-dashboard.json
+
+docker exec -it a910ac2d491b cat /home/grimoirelab/git-dashboard.json
+
+
+kidash --elastic_url-enrich http://localhost:9200 \
+  --import /tmp/git-dashboard.json
+
+
+kidash --elastic_url-enrich http://localhost:9200 \
+  --import /tmp/stackoverflow-dashboard.json
+
+
+[stackexchange]
+raw_index = stackexchange_raw
+enriched_index = stackexchange_enriched
+token = [your stackexchange token]
+
+
+CHANGING JSON FILE AS WELL
+
+docker run --net="host" \
+    -v $(pwd)/mytoken.cfg:/override.cfg \
+    -v $(pwd)/logs:/logs \
+    -v $(pwd)/infra-local.cfg:/infra.cfg \
+    -v $(pwd)/myprojects.json:/projects.json \
+    grimoirelab/installed
+
+
+
+
+
+EARLIER CONFIG
+
+[github]
+api-token = bbecc945cb0fd23741b231a43725d3fdb79a2f99
+
+
+
+
+NEW CONFIG
+
+[git]
+raw_index = git_grimoire_161116
+enriched_index = git_grimoire_161116_enriched_161209b
+
+[github]
+raw_index = github_grimoire_161116
+enriched_index = github_grimoire_161116_enriched_161123a
+backend-token = bbecc945cb0fd23741b231a43725d3fdb79a2f99
+
+[stackexchange]
+raw_index = stackexchange_raw
+enriched_index = stackexchange_enriched
+token = 'uWCj9YP1tJg8lj)llnpSjg(('
+
+
+
+
+
+
+
+INSTALLING ON SERVER
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+sudo apt-get update
+
+sudo apt-get install -y docker-ce
+
+sudo usermod -aG docker ${USER}
+
+exit
+
+apt-cache policy docker-ce
+
+sudo systemctl status docker
+
+docker run -p 127.0.0.1:5601:5601 -v /home/ubuntu/credentials.cfg:/override.cfg -v /home/ubuntu/myprojects.json:/projects.json -ti grimoirelab/full
+
+
+CREDENTIALS.CFG
+
+# [meetup]
+# raw_index = meetup_test-raw
+# enriched_index =  meetup_test
+# api-token = 256d29254cbf254611f842747d28
+
+# [telegram]
+# raw_index = telegram_test-raw
+# enriched_index = telegram_test
+# api-token = 29cb6b4bfdacfaf5153f7d573f54e4cd
+
+# [twitter]
+# collect = false
+# raw_index = twitter_test-raw
+# enriched_index = twitter_test
+# api-token = gZayZbb485cpReKFZoefp2C5H
+
+[stackexchange]
+es_collection_url = http://127.0.0.1:9200
+raw_index = stackexchange_test-raw
+enriched_index = stackexchange_test
+site = stackoverflow
+# from-date = 2019-02-25
+api-token = uWCj9YP1tJg8lj)llnpSjg((
+
+[git]
+raw_index = git_test-raw
+enriched_index = git_test
+studies = []
+
+[enrich_demography:1]
+date_field = grimoire_creation_date
+author_field =  author_uuid
+
+[enrich_areas_of_code]
+in_index = git_test-raw
+out_index = git_test-aoc
+
+[enrich_onion]
+in_index = git_test
+out_index = git_test-onion
+contribs_field = hash
+no_incremental = true
+
+[github]
+raw_index = github_test-raw
+enriched_index = github_test
+api-token = bbecc945cb0fd23741b231a43725d3fdb79a2f99
+sleep-for-rate = true
+category = issue
+sleep-time = 300
+
+[github:pull]
+raw_index = github_test-raw-pull
+enriched_index = github_test-pull
+api-token = bbecc945cb0fd23741b231a43725d3fdb79a2f99
+sleep-for-rate = true
+category = pull_request
+sleep-time = 300
+
+# [askbot]
+# collect = false
+# raw_index = askbot_test-raw
+# enriched_index = askbot_test
+
+# [bugzilla]
+# raw_index = bugzilla_test-raw
+# enriched_index = bugzilla-test
+
+# [bugzillarest]
+# raw_index = bugzillarest_test-raw
+# enriched_index = bugzillarest_test
+
+# [confluence]
+# raw_index = confluence_test-raw
+# enriched_index = confluence_test
+
+# [mbox]
+# raw_index = mbox_test-raw
+# enriched_index = mbox_test
+
+
+MYPROJECTS.JSON
+
+{
+    "GrimoireLab": {
+        "stackexchange": [
+            "p"
+        ]
+    }
+}
+
+cat logs/perceval.log
+
+
+
+
+
+
