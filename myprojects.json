@@ -1,25 +1,78 @@
 {
-    "Heroku": {
+    "GrimoireLab": {
         "git": [
-          "https://github.com/jessamynsmith/heroku-buildpack-apt.git",
-
+            "https://github.com/chaoss/grimoirelab",
+            "https://github.com/chaoss/grimoirelab-bestiary",
+            "https://github.com/chaoss/grimoirelab-ceres",
+            "https://github.com/chaoss/grimoirelab-elk",
+            "https://github.com/chaoss/grimoirelab-hatstall"
         ],
-        "github:pull": [
-            "https://github.com/jessamynsmith/heroku-buildpack-apt"
-        ],
-        "github:issue": [
-            "https://github.com/jessamynsmith/heroku-buildpack-apt"
-        ],
-        "stackexchange": [
-            "http://stackoverflow.com/questions/tagged/heroku"
-        ],
-        "twitter": [
-            "heroku"
+        "github": [
+            "https://github.com/chaoss/grimoirelab",
+            "https://github.com/chaoss/grimoirelab-bestiary",
+            "https://github.com/chaoss/grimoirelab-ceres"
         ],
         "meetup": [
-            "South-East-Puppet-User-Group"
+            "pydelhi"
+        ],
+        "telegram": [
+            "computer_science_and_programming"
+        ],
+        "stackexchange":[
+            "python"
         ]
+    },
+    "Augur": {
+        "git": [
+            "https://github.com/chaoss/augur"
+        ],
+        "github": [
+            "https://github.com/chaoss/augur"
+        ],
+        "meetup": [
+            "React-Delhi-NCR"
+        ],
+        "telegram": [
+            "fedevelopment"
+        ],
+        "stackexchange":[
+            "django"
+        ]
+        
+    },
+    "cregit": {
+        "git": [
+            "https://github.com/cregit/cregit"
+        ],
+        "github": [
+            "https://github.com/cregit/cregit"
+        ],
+        "meetup": [
+            "adg-delhi"
+        ],
+        "telegram": [
+            "TechGuide"
+        ],
+        "stackexchange":[
+            "angular"
+        ]
+    },
+    "Prospector": {
+        "git": [
+            "https://github.com/chaoss/prospector"
+        ],
+        "github": [
+            "https://github.com/chaoss/prospector"
+        ],
+        "meetup":[
+            "ilugdelhi"
+        ],
+        "telegram": [
+            "geekschannel"
+        ],
+        "stackexchange":[
+            "aws"
+        ]
+        
     }
-
-    
 }

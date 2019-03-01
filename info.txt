@@ -1,6 +1,11 @@
 docker run -p 127.0.0.1:5601:5601 -v /Users/nilansh/Desktop/grimoirelab_config/credentials.cfg:/override.cfg -v /Users/nilansh/Desktop/grimoirelab_config/myprojects.json:/projects.json -ti grimoirelab/full
 
 
+In root directory
+
+/
+
+
 docker run -p 5601:5601 -v $(pwd)/credentials.cfg:/mordred-override.cfg -t grimoirelab/full
 
 ssh -i Downloads/grimoire.pem ubuntu@ec2-18-223-235-95.us-east-2.compute.amazonaws.com
